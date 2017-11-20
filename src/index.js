@@ -60,8 +60,10 @@ class MovieSearch extends React.Component {
     };
 
     render() {
+        const loader = <h4>Loading...</h4>;
         return (
             <div>
+                { this.state.state ? loader : '' }
                 <h1>Movies</h1>
                 <Movie {...this.state.movie} />
                 <input type="text" onChange={this.onUserSearch} value={this.state.input} />
