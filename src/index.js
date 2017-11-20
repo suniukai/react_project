@@ -37,7 +37,8 @@ class HelloWorld extends React.Component {
 
 class MovieSearch extends React.Component {
     state = {
-        movie: {}
+        movie: {},
+        state: false
     };
 
     componentWillMount() {
@@ -45,13 +46,15 @@ class MovieSearch extends React.Component {
     }
 
     onUserSearch = (e) => {
-        this.onRequest(e.target.value);
+        let value = e.target.value.replace(/[^a-z]+/gi, '');
+        this.onRequest(value);
     };
 
     onRequest = (value = 'fast') => {
+        this.setState({state: true});
         fetch(`http://www.omdbapi.com/?t=${value}&apikey=969a0dc3`)
             .then(response => response.json())
-            .then(json => this.setState({movie: json}))
+            .then(json => this.setState({movie: json, state: false}))
     };
 
     render() {
