@@ -38,6 +38,7 @@ class HelloWorld extends React.Component {
 class MovieSearch extends React.Component {
     state = {
         movie: {},
+        input: '',
         state: false
     };
 
@@ -47,6 +48,7 @@ class MovieSearch extends React.Component {
 
     onUserSearch = (e) => {
         let value = e.target.value.replace(/[^a-z]+/gi, '');
+        this.setState({input: value});
         this.onRequest(value);
     };
 
@@ -62,7 +64,7 @@ class MovieSearch extends React.Component {
             <div>
                 <h1>Movies</h1>
                 <Movie {...this.state.movie} />
-                <input type="text" onChange={this.onUserSearch} />
+                <input type="text" onChange={this.onUserSearch} value={this.state.input} />
             </div>
         )
     }
